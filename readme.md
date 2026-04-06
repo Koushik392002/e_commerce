@@ -1,83 +1,136 @@
-E-Commerce API
+# E-Commerce API
 
 A simple FastAPI-based e-commerce backend that supports user authentication, products, cart, and orders.
 
-Features
-User authentication with JWT (signup/login)
-Product catalog management
-Cart management
-Order placement and tracking
-Environment variable configuration
-Setup Instructions
-1. Create a virtual environment
+## Features
+
+- User authentication with JWT (signup/login)
+- Product catalog management
+- Cart management
+- Order placement and tracking
+- Environment variable configuration
+
+---
+
+## Setup Instructions
+
+### 1. Create a virtual environment
+
+```bash
 python -m venv venv
-# Activate the virtual environment
-source venv/bin/activate   # Linux/macOS
-venv\Scripts\activate      # Windows
-2. Install dependencies
+```
+
+Activate the virtual environment:
+
+```bash
+# Linux/macOS
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate
+```
+
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
-3. Create a .env file
+```
 
-Copy .env.example and update values:
+### 3. Create a `.env` file
 
+Copy `.env.example` and update values:
+
+```
 SECRET_KEY=your_secret_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
-4. Run the API
+```
+
+### 4. Run the API
+
+```bash
 uvicorn main:app --reload
-Open http://127.0.0.1:8000/docs
- to access Swagger UI and explore the API endpoints.
-API Endpoints
-Auth
-Endpoint	Method	Description
-/signup	POST	Register a new user
-/login	POST	Login and get JWT token
-Products
-Endpoint	Method	Description
-/products	GET	List all products
-/products/products/{id}	GET	Get single product details
-/products/add_product/{id}	POST	Create new product (admin)
-/products/delete_product/{id}	DELETE	Delete a product (admin)
-/products/update_product/{id}	PUT	Update a product (admin)
-Cart
-Endpoint	Method	Description
-/cart/cart	GET	Get user cart items
-/cart/cart/add_to_cart	POST	Add product to cart
-/cart/remove_from_cart/{id}	DELETE	Remove product from cart
-Orders
-Endpoint	Method	Description
-/orders/orders	GET	List all orders
-/orders/place_orders	POST	Place an order
-/orders/orders/{id}	GET	Get order details
-/orders/orders/{order_id}/cancel	DELETE	Cancel an order
-/orders/orders/{order_id}/{status}	PUT	Update an order (admin)
+```
 
-Note: JWT token is required for /cart, /orders, and /products endpoints.
-Pass it in the Authorization header:
-Authorization: Bearer <your_token>
+Open http://127.0.0.1:8000/docs to access Swagger UI and explore the API endpoints.
 
-Environment Variables
-Variable	Description
-SECRET_KEY	Secret key for JWT signing
-ALGORITHM	JWT algorithm (e.g., HS256)
-ACCESS_TOKEN_EXPIRE_MINUTES	Token expiration time in minutes
-Project Structure
+---
+
+## API Endpoints
+
+### Auth
+
+| Endpoint  | Method | Description              |
+|-----------|--------|--------------------------|
+| /signup   | POST   | Register a new user      |
+| /login    | POST   | Login and get JWT token  |
+
+### Products
+
+| Endpoint                        | Method | Description                    |
+|---------------------------------|--------|--------------------------------|
+| /products                       | GET    | List all products              |
+| /products/{id}                  | GET    | Get single product details     |
+| /products/add_product           | POST   | Create new product (admin)     |
+| /products/delete_product/{id}   | DELETE | Delete a product (admin)       |
+| /products/update_product/{id}   | PUT    | Update a product (admin)       |
+
+### Cart
+
+| Endpoint                    | Method | Description               |
+|-----------------------------|--------|---------------------------|
+| /cart                       | GET    | Get user cart items       |
+| /cart/add_to_cart           | POST   | Add product to cart       |
+| /cart/remove_from_cart/{id} | DELETE | Remove product from cart  |
+
+### Orders
+
+| Endpoint                          | Method | Description              |
+|-----------------------------------|--------|--------------------------|
+| /orders                           | GET    | List all orders          |
+| /orders/place_orders              | POST   | Place an order           |
+| /orders/{id}                      | GET    | Get order details        |
+| /orders/{order_id}/cancel         | DELETE | Cancel an order          |
+| /orders/{order_id}/{status}       | PUT    | Update an order (admin)  |
+
+> **Note:** JWT token is required for `/cart`, `/orders`, and `/products` endpoints.
+> Pass it in the Authorization header:
+> ```
+> Authorization: Bearer <your_token>
+> ```
+
+---
+
+## Environment Variables
+
+| Variable                    | Description                            |
+|-----------------------------|----------------------------------------|
+| SECRET_KEY                  | Secret key for JWT signing             |
+| ALGORITHM                   | JWT algorithm (e.g., HS256)            |
+| ACCESS_TOKEN_EXPIRE_MINUTES | Token expiration time in minutes       |
+
+---
+
+## Project Structure
+
+```
 ecommerce/
 ├── routes/
 │   ├── user.py
 │   ├── products.py
 │   ├── cart.py
 │   └── order.py
-├── main.py          # App entry point
-├── auth.py          # JWT & hashing logic
-├── models.py        # SQLAlchemy database models
-├── schemas.py       # Pydantic request/response models
-├── .env             # Environment variables
+├── main.py        # App entry point
+├── auth.py        # JWT & hashing logic
+├── models.py      # SQLAlchemy database models
+├── schemas.py     # Pydantic request/response models
+├── .env           # Environment variables
 ├── .gitignore
 └── requirements.txt
+```
 
+---
 
-License
+## License
 
 MIT License © 2026 Koushik
-
