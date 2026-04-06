@@ -75,6 +75,9 @@ ecommerce/
 ├── .env             # Environment variables
 ├── .gitignore
 └── requirements.txt
+
+
 License
 
 MIT License © 2026 Koushik
+
