@@ -5,11 +5,11 @@ import database_models, schemas
 from dependencies import get_current_user
 
 router = APIRouter()
-@router.post("/")
+@router.get("/")
 def get_product(db: Session = Depends(get_db), user: database_models.User = Depends(get_current_user)):
     return db.query(database_models.Product).all()
 
-@router.post("/products/{product_id}")
+@router.get("/products/{product_id}")
 def get_product_by_id(product_id: int, db: Session = Depends(get_db), user: database_models.User = Depends(get_current_user)):
     return db.query(database_models.Product).filter(database_models.Product.product_id == product_id).first()
 
